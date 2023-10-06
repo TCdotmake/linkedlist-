@@ -1,4 +1,4 @@
-function mkLinkedList() {
+export function mkLinkedList() {
   return {
     list: null,
     counter: 0,

@@ -1,5 +1,45 @@
 <!DOCTYPE html>
-
+<script type="module">
+  import { mkLinkedList } from "./linkedList.js";
+  function random() {
+    return Math.floor(Math.random() * 99);
+  }
+  const ll = mkLinkedList();
+  console.log("Initial State:");
+  console.log(ll.toString());
+  const x = random();
+  console.log(`append(${x})`);
+  ll.append(x);
+  console.log(ll.toString());
+  const y = random();
+  console.log(`prepend(${y})`);
+  ll.prepend(y);
+  console.log(ll.toString());
+  const z = random();
+  console.log(`insertAt(${z},1)`);
+  ll.insertAt(z, 1);
+  console.log(ll.toString());
+  console.log("removeAt(0)");
+  ll.removeAt(0);
+  console.log(ll.toString());
+  console.log("pop()");
+  ll.pop();
+  console.log(ll.toString());
+  console.log("append 3 random number:");
+  ll.append(Math.floor(Math.random() * 99));
+  ll.append(Math.floor(Math.random() * 99));
+  ll.append(Math.floor(Math.random() * 99));
+  console.log(ll.toString());
+  console.log("head()");
+  console.log(ll.head());
+  console.log("tail()");
+  console.log(ll.tail());
+  console.log(`size: ${ll.size()}`);
+  console.log("at(2)");
+  console.log(ll.at(2));
+  console.log(`find(${z}): ${ll.find(z)}`);
+  console.log(`find(-2): ${ll.find(-2)}`);
+</script>
 <html>
   <head>
     <title>Linked List</title>
@@ -8,7 +48,5 @@
 
   <body>
     <div id="app"></div>
-
-    <script src="./index.mjs" type="module"></script>
   </body>
 </html>
