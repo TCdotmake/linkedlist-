@@ -52,12 +52,10 @@ function mkLinkedList() {
         this.list = null;
         this.counter = 0;
       } else if (this.counter > 1) {
-        console.log("entered pop");
         let current = this.list;
         while (current.nextNode.nextNode) {
           current = current.nextNode;
         }
-        console.log(current);
         current.nextNode = null;
         this.counter -= 1;
       }
@@ -86,13 +84,49 @@ function mkLinkedList() {
       let index = -1;
       let current = this.list;
       while (current) {
-        console.log("entered find");
         index += 1;
         if (current.value == value) {
           return index;
         }
+        current = current.nextNode;
       }
       return false;
+    },
+    insertAt(value, index) {
+      let current = this.list;
+      if (index <= 0 || current == null) {
+        this.prepend(value);
+      } else if (index >= this.counter) {
+        this.append(value);
+      } else {
+        let n = 0;
+        while (n + 1 < index && current) {
+          n += 1;
+          current = current.nextNode;
+        }
+        let newNode = mkNode(value);
+        newNode.nextNode = current.nextNode;
+        current.nextNode = newNode;
+        this.counter += 1;
+      }
+    },
+    removeAt(index) {
+      if (index >= 0 && index < this.counter) {
+        let prev = null;
+        let current = this.list;
+        let n = 0;
+        while (n < index) {
+          prev = current;
+          current = current.nextNode;
+          n += 1;
+        }
+        if (prev == null) {
+          this.list = current.nextNode;
+        } else {
+          prev.nextNode = current.nextNode;
+        }
+        this.counter -= 1;
+      }
     },
   };
 }
@@ -105,3 +139,34 @@ function mkNode(value = null) {
 }
 
 const ll = mkLinkedList();
+console.log("Initial State:");
+console.log(ll.toString());
+console.log("append(5)");
+ll.append(5);
+console.log(ll.toString());
+console.log("prepend(6)");
+ll.prepend(6);
+console.log(ll.toString());
+console.log("insertAt(15,1)");
+ll.insertAt(15, 1);
+console.log(ll.toString());
+console.log("removeAt(0)");
+ll.removeAt(0);
+console.log(ll.toString());
+console.log("pop()");
+ll.pop();
+console.log(ll.toString());
+console.log("append 3 random number:");
+ll.append(Math.floor(Math.random() * 99));
+ll.append(Math.floor(Math.random() * 99));
+ll.append(Math.floor(Math.random() * 99));
+console.log(ll.toString());
+console.log("head()");
+console.log(ll.head());
+console.log("tail()");
+console.log(ll.tail());
+console.log(`size: ${ll.size()}`);
+console.log("at(2)");
+console.log(ll.at(2));
+console.log(`find(15): ${ll.find(15)}`);
+console.log(`find(-2): ${ll.find(-2)}`);
