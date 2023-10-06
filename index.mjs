@@ -9,9 +9,9 @@ function mkLinkedList() {
       } else {
         let current = this.list;
         while (current.nextNode) {
-          current = current.next;
+          current = current.nextNode;
         }
-        current.next = newNode;
+        current.nextNode = newNode;
       }
       this.counter += 1;
     },
@@ -48,18 +48,51 @@ function mkLinkedList() {
       }
     },
     pop() {
-      if (this.size === 1) {
+      if (this.counter === 1) {
         this.list = null;
         this.counter = 0;
-      } else if (this.size > 1) {
+      } else if (this.counter > 1) {
+        console.log("entered pop");
         let current = this.list;
-        while (current.nextNode.newNode) {
+        while (current.nextNode.nextNode) {
           current = current.nextNode;
         }
         console.log(current);
         current.nextNode = null;
         this.counter -= 1;
       }
+    },
+    toString() {
+      let str = "";
+      let pointer = this.list;
+      while (pointer) {
+        str += `( ${pointer.value} ) -> `;
+        pointer = pointer.nextNode;
+      }
+      str += "null";
+      return str;
+    },
+    contains(value) {
+      let current = this.list;
+      while (current) {
+        if (current.value == value) {
+          return true;
+        }
+        current = current.nextNode;
+      }
+      return false;
+    },
+    find(value) {
+      let index = -1;
+      let current = this.list;
+      while (current) {
+        console.log("entered find");
+        index += 1;
+        if (current.value == value) {
+          return index;
+        }
+      }
+      return false;
     },
   };
 }
@@ -71,4 +104,4 @@ function mkNode(value = null) {
   };
 }
 
-export { mkLinkedList, mkNode };
+const ll = mkLinkedList();
